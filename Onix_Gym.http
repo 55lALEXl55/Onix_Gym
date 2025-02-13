@@ -1,0 +1,6 @@
+@Onix_Gym_HostAddress = http://localhost:5196
+
+GET {{Onix_Gym_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
