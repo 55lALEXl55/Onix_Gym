@@ -18,11 +18,9 @@ namespace Onix_Gym.Models
         public DateTime RegisterDate { get; set; }
         public DateTime? LastUpdate { get; set; }
         public int IdUser { get; set; }
-        // Relación con Employe (si es empleado)
         public Employe Employe { get; set; }
 
-        // Relación con Sale (como cliente)
-        public ICollection<Sale> Purchases { get; set; } // Compras realizadas como cliente
+        public ICollection<Sale> Purchases { get; set; }
     }
 }
 

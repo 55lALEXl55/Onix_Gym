@@ -8,7 +8,6 @@ namespace Onix_Gym.Models
         {
         }
 
-        // DbSets para cada modelo
         public DbSet<Category> Categories { get; set; }
         public DbSet<Employe> Employes { get; set; }
         public DbSet<HistorialPrice> HistorialPrices { get; set; }
@@ -25,46 +24,41 @@ namespace Onix_Gym.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Configuración de claves compuestas
             modelBuilder.Entity<SaleDetail>()
                 .HasKey(sd => new { sd.SaleId, sd.ProductId });
 
             modelBuilder.Entity<SaleMembership>()
                 .HasKey(sm => new { sm.SaleId, sm.MembershipId });
 
-            // Relación entre Sale y Person (cliente)
             modelBuilder.Entity<Sale>()
                 .HasOne(s => s.Person)
                 .WithMany(p => p.Purchases)
                 .HasForeignKey(s => s.PersonId)
-                .OnDelete(DeleteBehavior.Restrict); // Desactiva la eliminación en cascada
+                .OnDelete(DeleteBehavior.Restrict);
 
-            // Relación entre Sale y Employe (empleado)
             modelBuilder.Entity<Sale>()
                 .HasOne(s => s.Employe)
                 .WithMany(e => e.Sales)
                 .HasForeignKey(s => s.EmployeId)
-                .OnDelete(DeleteBehavior.Restrict); // Desactiva la eliminación en cascada
+                .OnDelete(DeleteBehavior.Restrict);
 
-            // Relación entre Product y Category
             modelBuilder.Entity<Product>()
                 .HasOne(p => p.Category)
                 .WithMany(c => c.Products)
                 .HasForeignKey(p => p.CategoryId);
 
-            // Relación entre Product and Supplier
+
             modelBuilder.Entity<Product>()
                 .HasOne(p => p.Supplier)
                 .WithMany(s => s.Products)
                 .HasForeignKey(p => p.SupplierId);
 
-            // Relación entre User y Employe
+
             modelBuilder.Entity<User>()
                 .HasOne(u => u.Employe)
                 .WithOne(e => e.User)
                 .HasForeignKey<Employe>(e => e.UserId);
 
-            // Relación entre User y Role
             modelBuilder.Entity<User>()
                 .HasOne(u => u.Role)
                 .WithMany(r => r.Users)

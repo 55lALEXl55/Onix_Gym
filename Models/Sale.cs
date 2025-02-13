@@ -13,13 +13,13 @@ namespace Onix_Gym.Models
         public DateTime? LastUpdate { get; set; }
         public int IdUser { get; set; }
 
-        public int PersonId { get; set; } // FK
-        public Person Person { get; set; } // N a 1
-        public int EmployeId { get; set; } // FK
-        public Employe Employe { get; set; } // N a 1
+        public int PersonId { get; set; }
+        public Person Person { get; set; }
+        public int EmployeId { get; set; }
+        public Employe Employe { get; set; }
 
-        public ICollection<SaleDetail> SaleDetails { get; set; } // 1 a muchos
-        public ICollection<SaleMembership> SaleMemberships { get; set; } // 1 a muchos
+        public ICollection<SaleDetail> SaleDetails { get; set; } 
+        public ICollection<SaleMembership> SaleMemberships { get; set; }
     }
 
 }
